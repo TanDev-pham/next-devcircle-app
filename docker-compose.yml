@@ -1,0 +1,35 @@
+# docker-compose.yml
+services:
+  app:
+    build: .
+    container_name: devcircle_app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    env_file:
+      - .env.local
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/devcircle
+      - AUTH_SECRET=${AUTH_SECRET}
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17-alpine
+    container_name: devcircle_db
+    ports:
+      - "5433:5432" # Map container's port 5432 to host's port 5433 to avoid conflicts
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=devcircle
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
