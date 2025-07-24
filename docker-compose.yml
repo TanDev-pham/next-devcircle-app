@@ -9,8 +9,10 @@ services:
       - .:/app
       - /app/node_modules
       - /app/.next
+    env_file:
+      - .env.local
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/devcircle
+      - DATABASE_URL=${DATABASE_URL}
       - AUTH_SECRET=${AUTH_SECRET}
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
