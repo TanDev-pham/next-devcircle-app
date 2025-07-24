@@ -1,11 +1,7 @@
-# .dockerignore
-
 node_modules
 .next
 Dockerfile
 .dockerignore
 docker-compose.yml
 README.md
-
-# Bỏ qua tất cả các file .env
 .env*

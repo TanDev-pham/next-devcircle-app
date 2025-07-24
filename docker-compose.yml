@@ -9,8 +9,6 @@ services:
       - .:/app
       - /app/node_modules
       - /app/.next
-    env_file:
-      - .env.local
     environment:
       - DATABASE_URL=postgresql://user:password@db:5432/devcircle
       - AUTH_SECRET=${AUTH_SECRET}
